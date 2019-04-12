@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Registra Salt</title>
+</head>
+<body style="background-color:#313131">
+  <div class="mx-auto" style="width: 400px; margin-top: 10%;padding:1%;border-radius:2%;background-color:#eee">
+    <h1 class="card-title">Nova Salt</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+                <li style="list-style-type:none" class="font-weight-bolder" >Salt: {{ form.numero_salt }}</li>
+		        <li style="list-style-type:none" class="font-weight-bolder" >Data Envio: {{ form.data_envio }}</li>
+		        <li style="list-style-type:none" class="font-weight-bolder" >Situação: {{ form.situacoes }}</li>
+                <li style="list-style-type:none" class="font-weight-bolder" >Time: {{ form.time }}</li>
+                <li style="list-style-type:none" class="font-weight-bolder" >Colaborador: {{ form.colaborador }}</li>
+                <li style="list-style-type:none" class="font-weight-bolder" >#'s: {{ form.hashtags }}</li><br>
+                <button class="btn btn-success btn-sm" type="submit">Salvar</button>
+                <a class="btn btn-danger btn-sm" href="{% url 'List_chamados' %}">Relatório</a>
+        </form>
+    </div>
+
+<script>
+
+</script>
+ <div style="position:fixed;left:0;bottom:0;width:100%;color:white;text-align:center;">
+
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2019 Copyright: 
+    <a href="https://www.linkedin.com/in/willian-jesus-da-silva-998003155/"> Willian Jesus</a> | 
+    <a href="https://www.linkedin.com/in/lucas-fran%C3%A7a-8742ab151/"> Lucas Emygdio</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+</div>
+</body>
+</html>

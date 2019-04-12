@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="{% static "table.js" %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/handsontable@7.0.0/dist/handsontable.full.min.css" rel="stylesheet" media="screen">
+    <title>Relatorio Salt's</title>
+</head>
+<body style="background-color:#313131">
+<div class="mx-auto" style="width:90%; margin-top: 5%;padding:1%;background-color:#eee">
+<div style="margin-left:6%;padding:1%">
+    <a href="{% url 'Cadastro_chamados' %}" class="btn btn-success">Inicio</a>
+    <button id='export-file' class="btn btn-danger">Exportar</button>
+    <a href="{% url 'List_chamados' %}" class="btn btn-info">Atualizar</a>
+</div>
+    <ul>
+    <div id="TableView" class="mx-auto"></div>
+    </ul>
+ </div>
+
+ <div style="position:fixed;left:0;bottom:0;width:100%;color:white;text-align:center;">
+
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2019 Copyright: 
+    <a href="https://www.linkedin.com/in/willian-jesus-da-silva-998003155/"> Willian Jesus</a> | 
+    <a href="https://www.linkedin.com/in/lucas-fran%C3%A7a-8742ab151/"> Lucas Emygdio</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+</div>
+
+
+<script>
+
+var data = {{ data|safe }}
+
+for (i=0;i < data.length;i++){
+
+  data_formatar = new Date(data[i][1])
+  data[i][1] = data_formatar.toLocaleDateString('pt-BR');
+
+}
+
+var container = document.getElementById('TableView');
+var hot = new Handsontable(container, {
+  data: data,
+  manualColumnMove: true,
+  rowHeaders: true,
+  width: '90%',
+  colHeaders: ['Salt','Entrega','Time',"#'S",'Situação','Colaborador'],
+    columns: [
+    {type: 'text'},
+    {type: 'date', dateFormat: 'DD/MM/YYYY', correctFormat: true},
+    {type: 'text',},
+    {type: 'text',},
+    {type: 'text',}],
+  filters: true,
+  stretchH: "all",
+  dropdownMenu: true
+});
+
+  var button1 = document.getElementById('export-file');
+  var exportPlugin1 = hot.getPlugin('exportFile');
+  
+  button1.addEventListener('click', function() {
+    exportPlugin1.downloadFile('csv', {
+      bom: false,
+      columnDelimiter: ',',
+      columnHeaders: false,
+      exportHiddenColumns: true,
+      exportHiddenRows: true,
+      fileExtension: 'csv',
+      filename: 'Metas-CSV-file_[YYYY]-[MM]-[DD]',
+      mimeType: 'text/csv',
+      rowDelimiter: '\r\n',
+      rowHeaders: true
+    });
+  });
+
+
+
+</script>
+
+</body>
+</html>
