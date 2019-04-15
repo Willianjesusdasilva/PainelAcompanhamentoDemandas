@@ -45,7 +45,7 @@ var data = {{ data|safe }}
 for (i=0;i < data.length;i++){
 
   data_formatar = new Date(data[i][1])
-  data[i][1] = data_formatar.toLocaleDateString('pt-BR');
+  data[i][1] = data_formatar.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
 
 }
 
@@ -59,6 +59,7 @@ var hot = new Handsontable(container, {
     columns: [
     {type: 'text'},
     {type: 'date', dateFormat: 'DD/MM/YYYY', correctFormat: true},
+    {type: 'text',},
     {type: 'text',},
     {type: 'text',},
     {type: 'text',}],
